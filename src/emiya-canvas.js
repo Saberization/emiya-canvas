@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-04-25 16:59:49
  * @Last Modified by: guotq
- * @Last Modified time: 2018-04-27 16:01:54
+ * @Last Modified time: 2018-04-28 15:30:28
  * @Description: canvas hdmi
  */
 
@@ -136,13 +136,8 @@
             if (renderCallback && typeof renderCallback === 'function') {
                 renderCallback.call(this, {
                     base64: canvasEl.toDataURL(mime, this._data.quality),
-                    canvasEnlargeWidth: pixelRatioWidth,
-                    canvasEnlargeHeight: pixelRatioHeight,
                     width: canvasWidth,
-                    height: canvasHeight,
-                    pixelRatio: pixelRatio,
-                    drawHeight: drawHeight,
-                    drawWidth: drawWidth
+                    height: canvasHeight
                 });
             }
         }
