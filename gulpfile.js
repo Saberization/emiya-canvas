@@ -14,4 +14,12 @@ gulp.task('main', function() {
         .pipe(gulp.dest('./dist/'));
 });
 
-gulp.task('default', ['main']);
+gulp.task('module', function() {
+    gulp.src('./showcase.js')
+        .pipe(gulpBabel({
+            presets: ['env']
+        }))
+        .pipe(gulp.dest('./dist/'));
+});
+
+gulp.task('default', ['main', 'module']);
