@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-04-25 16:59:49
  * @Last Modified by: guotq
- * @Last Modified time: 2018-04-28 15:30:28
+ * @Last Modified time: 2018-06-05 16:38:11
  * @Description: canvas hdmi
  */
 
@@ -12,6 +12,7 @@
         typeof define === 'function' && define.amd ? define(factory()) : global.EmiyaCanvas = factory();
         
 }(window, function () {
+    
     const defaultSettings = {
         width: window.screen.width,
         height: window.screen.height,

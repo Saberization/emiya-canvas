@@ -2,9 +2,7 @@ const path = require('path');
 
 module.exports = {
     mode: 'development',
-    entry: [
-        './src/emiya-canvas.js'
-    ],
+    entry: ['babel-polyfill', './src/emiya-canvas.js'],
     output: {
         path: path.resolve(__dirname, 'dist/'),
         filename: 'emiya-canvas.bundle.js'

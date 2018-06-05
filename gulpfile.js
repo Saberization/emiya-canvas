@@ -5,7 +5,7 @@ const gulpUglify = require('gulp-uglify');
 
 // 预先 babel -> Uglify 压缩 .min -> 合并 -> 输出
 gulp.task('main', function() {
-    gulp.src(['./libs/exif.js', './src/emiya-canvas.js'])
+    gulp.src(['./libs/polyfill.min.js', './libs/exif.js', './src/emiya-canvas.js'])
         .pipe(gulpBabel({
             presets: ['env']
         }))
