@@ -37,7 +37,7 @@ __如下图：__
 
 ## 方法说明
 
-通过 `new` 创建一个 `EmiyaCanvas` 的实例，创建过程当中做了一些初始化组件的操作。
+通过 `new` 创建生成一个 `EmiyaCanvas` 的实例，创建过程当中做了一些初始化组件的操作。
 
 ```js
 const emiyaInstacne = new EmiyaCanvas();
