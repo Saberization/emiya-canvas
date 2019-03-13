@@ -4,6 +4,7 @@
     'use strict';
 
     var uploadEl = document.getElementById('upload');
+    var previewEl = document.getElementById('preview');
 
     // 修复过后的 canvas 元素
     var correctedEl = document.getElementById('corrected');
@@ -18,6 +19,10 @@
         uploadEl.click();
     });
 
+    document.getElementById('reload').addEventListener('click', function () {
+        window.location.reload();
+    });
+
     uploadEl.addEventListener('change', function () {
         var file = this.files[0];
 
@@ -29,7 +34,7 @@
 
         // 渲染画布
         emiya.render(correctedEl, {
-            width: 300,
+            width: window.screen.width,
             quality: .8
         }, function (response) {
             console.log(response);
@@ -49,6 +54,7 @@
             var img = new Image();
 
             img.src = e.target.result;
+            previewEl.src = e.target.result;
             img.onload = function () {
                 var imgWidth = img.width,
                     imgHeight = img.height;
@@ -56,9 +62,9 @@
                 var canvasWidth = imgWidth,
                     canvasHeight = imgHeight;
 
-                if (imgWidth > 300 || imgHeight > window.screen.height) {
-                    if (imgWidth > 300) {
-                        canvasWidth = 300;
+                if (imgWidth > window.screen.width || imgHeight > window.screen.height) {
+                    if (imgWidth > window.screen.width) {
+                        canvasWidth = window.screen.width;
                         canvasHeight = canvasWidth * imgHeight / imgWidth;
                     } else if (imgHeight > window.screen.height) {
                         canvasHeight = window.screen.height;

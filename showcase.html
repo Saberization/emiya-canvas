@@ -44,11 +44,17 @@
             border: 1px solid transparent;
             font-size: 14px;
         }
+
+        #preview {
+            width: 100%;
+            margin-top: 20px;
+        }
     </style>
 </head>
 
 <body>
     <button id="selectbtn">选择图片</button>
+    <button id="reload">reload</button>
 
     <h5>未修正的图片：</h5>
     <canvas id="uncorrected"></canvas>
@@ -56,10 +62,14 @@
     <h5>修正过后的图片：</h5>
     <canvas id="corrected"></canvas>
 
+    <h5>原生 Img：</h5>
+    <img src="" alt="" id="preview">
+
     <input type="file" class="hidden" id="upload" accept="image/*">
     
-    <script src="./dist/emiya-canvas.min.js"></script>
-    <script src="./dist/showcase.js"></script>
+    <script src="./libs/vconsole.min.js"></script>
+    <script src="./dist/emiya-canvas.min.js?t=1"></script>
+    <script src="./showcase.js?t=2"></script>
 </body>
 
 </html>

@@ -2,7 +2,7 @@
  * @Author: guotq
  * @Date: 2018-04-25 16:59:49
  * @Last Modified by: guotq
- * @Last Modified time: 2018-06-05 16:38:11
+ * @Last Modified time: 2019-03-13 09:55:24
  * @Description: canvas hdmi
  */
 
@@ -113,8 +113,8 @@
 
             let pixelRatio = this.getPixelRatio(ctx);
 
-            pixelRatio = pixelRatio ? pixelRatio + 2 : 0;
-
+            pixelRatio = pixelRatio ? pixelRatio + window.devicePixelRatio : 0;
+            
             let ret = this._getResize(options);
             let result = this._handleOrientation(ret, orientation);
             let canvasWidth = result.canvasWidth,
