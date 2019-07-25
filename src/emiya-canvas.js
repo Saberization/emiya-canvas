@@ -52,6 +52,14 @@
         }
 
         /**
+         * 可以直接设置 base64，免去文件对象互转的麻烦
+         * @param {String} b64 图片的 base64
+         */
+        setBase64(b64) {
+            this._data.base64 = b64;
+        }
+
+        /**
          * 渲染文件
          * @param {HTMLElement} canvasId 画布id
          * @param {Object} options 配置项
@@ -59,44 +67,56 @@
          */
         render(canvasId, options, callback) {
             const canvasEl = this.getHTMLElement(canvasId);
-            const file = this._data.file;
+            const file = this._data.file || this._data.base64;
 
             this.el.canvas = canvasEl;
             this.renderCallback = callback;
 
             if (!file) {
-                throw new Error('请先调用 setFile api 设置文件对象');
+                throw new Error('请先调用 setFile api 设置文件对象, 或调用 setBase64 api 设置文件流');
             }
 
             // 合并对象
             this.extend(this._data, options, defaultSettings);
             // 处理文件
-            this._handleFile(canvasEl, file);
+            this._handleFile(file);
         }
 
         /**
          * 处理文件
-         * @param {HTMLElement} canvasEl canvas元素
-         * @param {Object} file 文件对象
+         * @param {Object} file 文件对象或base64
          */
-        _handleFile(canvasEl, file) {
-            const p = this.blobToBase64(file),
-                imgEl = this.el.img,
+        _handleFile(file) {
+            const imgEl = this.el.img,
                 that = this;
 
-            p.then(function (b64) {
-                imgEl.src = b64;
-                that._data.base64 = b64;
+            if (typeof file === 'object') {
+                const p = this.blobToBase64(file);
 
+                p.then(function (b64) {
+                    imgEl.src = b64;
+                    that._data.base64 = b64;
+    
+                    imgEl.onload = function () {
+                        EXIF.getData(file, function () {
+                            EXIF.getAllTags(this);
+    
+                            // 绘制图片
+                            that._drawImage(b64, EXIF.getTag(this, 'Orientation'));
+                        });
+                    };
+                });
+            } else if (typeof file === 'string') {
+                imgEl.src = file;
                 imgEl.onload = function () {
-                    EXIF.getData(file, function () {
+                    EXIF.getData(imgEl, function () {
                         EXIF.getAllTags(this);
 
                         // 绘制图片
-                        that._drawImage(b64, EXIF.getTag(this, 'Orientation'));
+                        that._drawImage(file, EXIF.getTag(this, 'Orientation'));
                     });
                 };
-            });
+            }
         }
 
         /**
