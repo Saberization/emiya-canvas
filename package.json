@@ -11,7 +11,7 @@
   "dependencies": {
     "babel-loader": "^7.1.4",
     "babel-preset-env": "^1.6.1",
-    "gulp": "^3.9.1",
+    "gulp": "^4.0.2",
     "gulp-babel": "^7.0.1",
     "gulp-concat": "^2.6.1",
     "gulp-uglify": "^3.0.0",
